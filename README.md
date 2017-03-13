@@ -1,4 +1,7 @@
 # TF-recomm
+
+This version is packaged into a dockerfile
+
 ### Tensorflow-based Recommendation systems
 
 Factorization models are very popular in recommendation systems because they can be used to discover latent features underlying the interactions between two different kinds of entities. There are many variations of factorization algorithms (SVD, SVD++, factorization machine, ...). When implementing them or developing new ones, you probably spend a lot of time on the following areas rather than modeling:
