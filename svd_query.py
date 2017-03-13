@@ -39,6 +39,8 @@ def get_data():
 
 
 if __name__ == '__main__':
+    zeros= tf.Variable(tf.zeros([1]),name="zeros")
+    init_op = tf.global_variables_initializer()
     df_train, df_test = get_data()
     saver=tf.train.Saver()
     with tf.Session() as sess:

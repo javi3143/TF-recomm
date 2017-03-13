@@ -58,6 +58,7 @@ def svd(train, test):
                                            device=DEVICE)
     global_step = tf.contrib.framework.get_or_create_global_step()
     _, train_op = ops.optimization(infer, regularizer, rate_batch, learning_rate=0.001, reg=0.05, device=DEVICE)
+    zeros= tf.Variable(tf.zeros([1]),name="zeros")
 
     init_op = tf.global_variables_initializer()
     saver=tf.train.Saver()
