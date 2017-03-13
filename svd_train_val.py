@@ -90,7 +90,7 @@ def svd(train, test):
                 summary_writer.add_summary(train_err_summary, i)
                 summary_writer.add_summary(test_err_summary, i)
                 start = end
-
+         users=[1]
 
 if __name__ == '__main__':
     df_train, df_test = get_data()
