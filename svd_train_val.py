@@ -94,6 +94,11 @@ def svd(train, test):
         items=[1]
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
         print (pred_batch)
+        users=[1,2,3]
+        items=[4,5,6]
+        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
+        print (pred_batch)
+
 
 if __name__ == '__main__':
     df_train, df_test = get_data()
