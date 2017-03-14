@@ -32,12 +32,14 @@ def make_scalar_summary(name, val):
 
 if __name__ == '__main__':
     #zeros= tf.Variable(tf.zeros([1]),name="zeros")
+    infer, regularizer = ops.inference_svd(user_batch, item_batch, user_num=USER_NUM, item_num=ITEM_NUM, dim=DIM,
+                                           device=DEVICE)
     init_op = tf.global_variables_initializer()
     #print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
-    df_train, df_test = get_data()
+    #df_train, df_test = get_data()
     #saver=tf.train.Saver()
     with tf.Session() as sess:
-       new_saver = tf.train.import_meta_graph("tfrecomm")
+       new_saver = tf.train.import_meta_graph("tfrecomm.meta")
        new_saver.restore(sess, tf.train.latest_checkpoint('./'))
  
        #saver.restore(sess,"/tmp/tfrecomm.ckpt")
