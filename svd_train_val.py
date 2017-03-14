@@ -28,6 +28,7 @@ def make_scalar_summary(name, val):
     return summary_pb2.Summary(value=[summary_pb2.Summary.Value(tag=name, simple_value=val)])
 
 
+
 def get_data():
     df = dataio.read_process("/tmp/movielens/ml-1m/ratings.dat", sep="::")
     rows = len(df)
@@ -35,10 +36,10 @@ def get_data():
     split_index = int(rows * 0.9)
     df_train = df[0:split_index]
     df_test = df[split_index:].reset_index(drop=True)
-    return df_train, df_test
+    return df_train, df_test, rows
 
 
-def svd(train, test):
+def svd(train, test,len):
     samples_per_batch = len(train) // BATCH_SIZE
 
     iter_train = dataio.ShuffleIterator([train["user"],
@@ -105,8 +106,13 @@ def svd(train, test):
         save_path=saver.save(sess,"tfrecomm")
         print("Model saved in file: %s" % save_path)
         print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
+        movies=[]
+        for i in range(0, len):
+           movies[i]=i
+        print (movies)
+        
 
 if __name__ == '__main__':
-    df_train, df_test = get_data()
-    svd(df_train, df_test)
+    df_train, df_test, len = get_data()
+    svd(df_train, df_test, len)
     print("Done!")
