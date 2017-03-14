@@ -32,6 +32,8 @@ def make_scalar_summary(name, val):
 
 if __name__ == '__main__':
     #zeros= tf.Variable(tf.zeros([1]),name="zeros")
+    user_batch = tf.placeholder(tf.int32, shape=[None], name="id_user")
+    item_batch = tf.placeholder(tf.int32, shape=[None], name="id_item")
     infer, regularizer = ops.inference_svd(user_batch, item_batch, user_num=USER_NUM, item_num=ITEM_NUM, dim=DIM,
                                            device=DEVICE)
     init_op = tf.global_variables_initializer()

@@ -104,7 +104,7 @@ def svd(train, test):
         #meta_graph_def = tf.train.export_meta_graph(filename='/tmp/tfrecomm.meta')
         save_path=saver.save(sess,"tfrecomm")
         print("Model saved in file: %s" % save_path)
-        print_tensors_in_checkpoint_file(file_name="tfrecomm", tensor_name='')
+        print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
 
 if __name__ == '__main__':
     df_train, df_test = get_data()
