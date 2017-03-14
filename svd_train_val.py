@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 from six import next
 from tensorflow.core.framework import summary_pb2
+from tensorflow.python.tools.inspect_checkpoint import print_tensors_in_checkpoint_file
 
 import dataio
 import ops
@@ -101,6 +102,8 @@ def svd(train, test):
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
         print (pred_batch)
         save_path=saver.save(sess,"/tmp/tfrecomm.ckpt")
+        print("Model saved in file: %s" % save_path)
+        print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
 
 if __name__ == '__main__':
     df_train, df_test = get_data()

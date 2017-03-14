@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 from six import next
 from tensorflow.core.framework import summary_pb2
+from tensorflow.python.tools.inspect_checkpoint import print_tensors_in_checkpoint_file
 
 import dataio
 import ops
@@ -41,6 +42,7 @@ def get_data():
 if __name__ == '__main__':
     zeros= tf.Variable(tf.zeros([1]),name="zeros")
     init_op = tf.global_variables_initializer()
+    print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
     df_train, df_test = get_data()
     saver=tf.train.Saver()
     with tf.Session() as sess:
