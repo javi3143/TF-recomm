@@ -39,7 +39,7 @@ def get_data():
     return df_train, df_test, rows
 
 
-def svd(train, test,len):
+def svd(train, test,length):
     samples_per_batch = len(train) // BATCH_SIZE
 
     iter_train = dataio.ShuffleIterator([train["user"],
@@ -107,12 +107,12 @@ def svd(train, test,len):
         print("Model saved in file: %s" % save_path)
         print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
         movies=[]
-        for i in range(0, len):
+        for i in range(0, length):
            movies[i]=i
         print (movies)
         
 
 if __name__ == '__main__':
-    df_train, df_test, len = get_data()
-    svd(df_train, df_test, len)
+    df_train, df_test, length = get_data()
+    svd(df_train, df_test, length)
     print("Done!")
