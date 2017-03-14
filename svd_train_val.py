@@ -108,7 +108,7 @@ def svd(train, test,length):
         print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
         movies=[]
         for i in range(0, length):
-           movies[i]=i
+           movies.append(i)
         print (movies)
         
 
