@@ -1,5 +1,7 @@
 git add *.py
-git commit -m "Buildfile"
+git add Dockerfile
+git add Buildfile
+git commit -m "From Buildfile"
 git push
 docker rmi tfrecomm
 docker build -t tfrecomm .
