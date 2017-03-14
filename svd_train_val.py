@@ -59,7 +59,7 @@ def svd(train, test):
                                            device=DEVICE)
     global_step = tf.contrib.framework.get_or_create_global_step()
     _, train_op = ops.optimization(infer, regularizer, rate_batch, learning_rate=0.001, reg=0.05, device=DEVICE)
-    zeros= tf.Variable(tf.zeros([1]),name="zeros")
+    #zeros= tf.Variable(tf.zeros([1]),name="zeros")
 
     init_op = tf.global_variables_initializer()
     saver=tf.train.Saver()
@@ -101,9 +101,10 @@ def svd(train, test):
         items=[4,5,6]
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
         print (pred_batch)
-        save_path=saver.save(sess,"/tmp/tfrecomm.ckpt")
-        print("Model saved in file: %s" % save_path)
-        print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
+        meta_graph_def = tf.train.export_meta_graph(filename='/tmp/tfrecomm.meta')
+        //save_path=saver.save(sess,"/tmp/tfrecomm.ckpt")
+        //print("Model saved in file: %s" % save_path)
+        //print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
 
 if __name__ == '__main__':
     df_train, df_test = get_data()

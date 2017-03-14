@@ -40,13 +40,16 @@ def get_data():
 
 
 if __name__ == '__main__':
-    zeros= tf.Variable(tf.zeros([1]),name="zeros")
+    //zeros= tf.Variable(tf.zeros([1]),name="zeros")
     init_op = tf.global_variables_initializer()
-    print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
+    //print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
     df_train, df_test = get_data()
-    saver=tf.train.Saver()
+    //saver=tf.train.Saver()
     with tf.Session() as sess:
-       saver.restore(sess,"/tmp/tfrecomm.ckpt")
+       new_saver = tf.train.import_meta_graph('/tmp/tfrecomm.meta')
+       new_saver.restore(sess, '/tmp/tfrecomm')
+ 
+       //saver.restore(sess,"/tmp/tfrecomm.ckpt")
        users=[1]
        items=[1]
        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
