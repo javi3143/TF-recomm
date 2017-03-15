@@ -99,7 +99,12 @@ def svd(train, test,length):
 		#meta_graph_def = tf.train.export_meta_graph(filename='/tmp/tfrecomm.meta')
 		save_path=saver.save(sess,"tfrecomm")
 		print("Model saved in file: %s" % save_path)
-	   
+	    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		# Bind the socket to the port
+		server_address = ('0.0.0.0', 81)
+		print >>sys.stderr, 'starting up on %s port %s' % server_address
+		sock.bind(server_address)
+		sock.listen(1)
 		movies=list(range(3052))
 		
 		users=[1]
@@ -116,12 +121,7 @@ def svd(train, test,length):
 		print
 		topmovies= smovies[0:10]
 		print (topmovies)
-		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		# Bind the socket to the port
-		server_address = ('0.0.0.0', 81)
-		print >>sys.stderr, 'starting up on %s port %s' % server_address
-		sock.bind(server_address)
-		sock.listen(1)
+		
         while True:
             # Wait for a connection
             print >>sys.stderr, 'waiting for a connection'
