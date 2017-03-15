@@ -133,8 +133,16 @@ def svd(train, test,length):
                     data = connection.recv(16)
                     print >>sys.stderr, 'received "%s"' % data
                     if data:
+                        del users[:]
+                        
+                        users.add(int(data))
+                        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
+		
+		                moviesrecomm=list(zip(movies,pred_batch))
+		                smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+		                topmovies= smovies[0:10]
                         print >>sys.stderr, 'sending data back to the client'
-                        connection.sendall(data)
+                        connection.sendall(topmovies)
                     else:
                         print >>sys.stderr, 'no more data from', client_address
                         break
