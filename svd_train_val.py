@@ -110,7 +110,9 @@ def svd(train, test,length):
         for i in range(0, length):
            movies.append(i)
         print (movies)
-        
+        users=[1]
+        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
+        print (pred_batch)
 
 if __name__ == '__main__':
     df_train, df_test, length = get_data()
