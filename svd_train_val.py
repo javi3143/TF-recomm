@@ -106,14 +106,13 @@ def svd(train, test,length):
         save_path=saver.save(sess,"tfrecomm")
         print("Model saved in file: %s" % save_path)
         print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
-        movies=[]
-        for i in range(0, length):
-           movies.append(i)
+        movies=list(range(3052))
         print (movies)
         users=[1]
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
         print (pred_batch)
-
+        a=list(zip(movies,pred_batch))
+        print (a)
 if __name__ == '__main__':
     df_train, df_test, length = get_data()
     svd(df_train, df_test, length)
