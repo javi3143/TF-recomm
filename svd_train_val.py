@@ -94,26 +94,26 @@ def svd(train, test,length):
                 summary_writer.add_summary(train_err_summary, i)
                 summary_writer.add_summary(test_err_summary, i)
                 start = end
-        users=[1]
-        items=[1]
-        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
-        print (pred_batch)
-        users=[1,2,3]
-        items=[4,5,6]
-        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: items})
-        print (pred_batch)
+
         #meta_graph_def = tf.train.export_meta_graph(filename='/tmp/tfrecomm.meta')
         save_path=saver.save(sess,"tfrecomm")
         print("Model saved in file: %s" % save_path)
-        print_tensors_in_checkpoint_file(file_name="tfrecomm.meta", tensor_name='')
+       
         movies=list(range(3052))
-        print (movies)
+        
         users=[1]
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
-        print (pred_batch)
+        
         moviesrecomm=list(zip(movies,pred_batch))
         print (moviesrecomm)
-        print (sorted (moviesrecomm,key=lambda x:x[1]))
+        print ("------------------------------------------------------------")
+        print
+        smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+	    print (smovie)
+	    print ("------------------------------------------------------------")
+        print
+        topmovies= smovies[0:10]
+        print (topmovies)
         
 if __name__ == '__main__':
     df_train, df_test, length = get_data()
