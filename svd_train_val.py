@@ -111,8 +111,10 @@ def svd(train, test,length):
         users=[1]
         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
         print (pred_batch)
-        a=list(zip(movies,pred_batch))
-        print (a)
+        moviesrecomm=list(zip(movies,pred_batch))
+        print (moviesrecomm)
+        print (sorted (moviesrecomm,key=lambda x:x[1]))
+        
 if __name__ == '__main__':
     df_train, df_test, length = get_data()
     svd(df_train, df_test, length)
