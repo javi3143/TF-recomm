@@ -8,4 +8,4 @@ docker build -t tfrecomm .
 docker tag tfrecomm acobley/tfrecomm
 docker push acobley/tfrecomm
 docker rm runtfrecomm
-docker run --name runtfrecomm -i -t acobley/tfrecomm bash
+docker run --name runtfrecomm -p 10000:10000 -i -t acobley/tfrecomm bash
