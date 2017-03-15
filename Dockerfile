@@ -5,5 +5,6 @@ RUN apt-get update && apt-get install -y \
    emacs
 RUN pip install Numpy
 RUN pip install Pandas
-RUN git clone https://github.com/acobley/TF-recomm.git #recom16
+RUN git clone https://github.com/acobley/TF-recomm.git #recom17
 RUN ./TF-recomm/download_data.sh
+EXPOSE 10000
