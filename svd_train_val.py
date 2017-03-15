@@ -136,6 +136,7 @@ def svd(train, test,length):
                         del users[:]
                         
                         users.append(int(data))
+                        print (users)
                         pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
                         moviesrecomm=list(zip(movies,pred_batch))
                         smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
