@@ -39,7 +39,7 @@ def get_data():
 	df_test = df[split_index:].reset_index(drop=True)
 	return df_train, df_test, rows
 def get_movies():
-	df = dataio.read_process("/tmp/movielens/ml-1m/movies.dat", sep="::")
+	df = dataio.read_movies("/tmp/movielens/ml-1m/movies.dat", sep="::")
 	rows = len(df)
 	return df, rows	
 
