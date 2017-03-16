@@ -7,8 +7,8 @@ def read_movies(filname, sep="\t"):
     df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
     #df["movie"] =""
     #df["title"] =""
-    #for col in ("user", "item"):
-    #    df[col] = df[col].astype(np.int32)
+    for col in ("movie"):
+        df[col] = df[col].astype(np.int32)
     #df["rate"] = df["rate"].astype(np.float32)
     return df
 

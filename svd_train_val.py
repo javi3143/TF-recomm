@@ -152,6 +152,6 @@ def svd(train, test,length,movies):
 if __name__ == '__main__':
 	df_train, df_test, length = get_data()
 	df_movies=get_movies()
-	print (df)
+	print (df_movies)
 	svd(df_train, df_test, length,df_movies)
 	print("Done!")
