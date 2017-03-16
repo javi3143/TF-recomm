@@ -151,7 +151,6 @@ def svd(train, test,length,movies):
                          connection.close()
 if __name__ == '__main__':
 	df_train, df_test, length = get_data()
-	df_movies=get_movies()
-	print (df_movies)
+	df_movies = get_movies()
 	svd(df_train, df_test, length,df_movies)
 	print("Done!")
