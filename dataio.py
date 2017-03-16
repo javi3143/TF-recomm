@@ -2,6 +2,15 @@ from __future__ import absolute_import, division, print_function
 import numpy as np
 import pandas as pd
 
+def read_movies(filname, sep="\t"):
+    col_names = ["movie", "title", "tags"]
+    df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
+    #df["movie"] =""
+    #df["title"] =""
+    #for col in ("user", "item"):
+    #    df[col] = df[col].astype(np.int32)
+    #df["rate"] = df["rate"].astype(np.float32)
+    return df
 
 def read_process(filname, sep="\t"):
     col_names = ["user", "item", "rate", "st"]
