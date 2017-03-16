@@ -5,10 +5,11 @@ import pandas as pd
 def read_movies(filname, sep="\t"):
     col_names = ["movie", "title", "tags"]
     df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
+    print (df)
     #df["movie"] =""
     #df["title"] =""
-    for col in ("movie"):
-        df[col] = df[col].astype(np.int32)
+    #for col in ("movie"):
+    #    df[col] = df[col].astype(np.int32)
     #df["rate"] = df["rate"].astype(np.float32)
     return df
 
