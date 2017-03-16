@@ -2,7 +2,7 @@ from __future__ import absolute_import, division, print_function
 import numpy as np
 import pandas as pd
 
-def read_movies(filname, sep="\t"):
+def read_movies(filname, sep="::"):
     col_names = ["movie", "title", "tags"]
     df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
     print (df)
