@@ -111,44 +111,40 @@ def svd(train, test,length):
 		pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
 		
 		moviesrecomm=list(zip(movies,pred_batch))
-		print (moviesrecomm)
-		print ("------------------------------------------------------------")
-		print
-		smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
-		print (smovies)
-		print
-		print ("------------------------------------------------------------")
-		print
+                smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+		
+		print (" Top Movies ------------------------------------------------------------")
+		
 		topmovies= smovies[0:10]
 		print (topmovies)
+		print
 		
-        while True:
-            # Wait for a connection
-            print >>sys.stderr, 'waiting for a connection'
-            connection, client_address = sock.accept()
-            try:
-                print >>sys.stderr, 'connection from', client_address
-                # Receive the data in small chunks and retransmit it
                 while True:
-                    data = connection.recv(16)
-                    print >>sys.stderr, 'received "%s"' % data
-                    if data:
-                        del users[:]
+                     # Wait for a connection
+                     print >>sys.stderr, 'waiting for a connection'
+                     connection, client_address = sock.accept()
+                     try:
+                         print >>sys.stderr, 'connection from', client_address
+                         # Receive the data in small chunks and retransmit it
+                         while True:
+                             data = connection.recv(16)
+                             print >>sys.stderr, 'received "%s"' % data
+                             if data:
+                                 del users[:]
                         
-                        users.append(int(data))
-                        print (users)
-                        pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
-                        moviesrecomm=list(zip(movies,pred_batch))
-                        smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
-                        topmovies= smovies[0:10]
-                        print >>sys.stderr, 'sending data back to the client'
-                        connection.sendall(topmovies)
-                    else:
-                        print >>sys.stderr, 'no more data from', client_address
-                        break
-            finally:
-                connection.close()
-            
+                                 users.append(int(data))
+                                 print (users)
+                                 pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
+                                 moviesrecomm=list(zip(movies,pred_batch))
+                                 smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+                                 topmovies= smovies[0:10]
+                                 print >>sys.stderr, 'sending data back to the client'
+                                 connection.sendall(topmovies)
+                             else:
+                                 print >>sys.stderr, 'no more data from', client_address
+                                 break
+                     finally:
+                         connection.close()
 if __name__ == '__main__':
 	df_train, df_test, length = get_data()
 	svd(df_train, df_test, length)
