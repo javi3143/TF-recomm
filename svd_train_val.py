@@ -142,6 +142,9 @@ def svd(train, test,length,movies):
                                  moviesrecomm=list(zip(movies,pred_batch))
                                  smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
                                  topmovies= smovies[0:10]
+                                 print (topmovies)
+                                 
+                                 print movies["title"][topmovies[1]]
                                  print >>sys.stderr, 'sending data back to the client'
                                  connection.sendall(topmovies)
                              else:
