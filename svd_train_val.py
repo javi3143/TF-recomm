@@ -17,7 +17,7 @@ BATCH_SIZE = 1000
 USER_NUM = 6040
 ITEM_NUM = 3952
 DIM = 15
-EPOCH_MAX = 100
+EPOCH_MAX = 10
 DEVICE = "/cpu:0"
 
 
@@ -146,7 +146,7 @@ def svd(train, test,length,movies):
                                  
                                  print movies["title"][topmovies[1]]
                                  print >>sys.stderr, 'sending data back to the client'
-                                 connection.sendall(topmovies)
+                                 connection.sendall(movies["title"][topmovies[2]])
                              else:
                                  print >>sys.stderr, 'no more data from', client_address
                                  break
