@@ -10,8 +10,8 @@ def read_movies(filname, sep="::"):
     print (df["tags"][1])
     #df["movie"] =""
     #df["title"] =""
-    #for col in ("movie"):
-    #    df[col] = df[col].astype(np.int32)
+    
+    df["movie"] = df["movie"].astype(np.int32)
     #df["rate"] = df["rate"].astype(np.float32)
     return df
 
