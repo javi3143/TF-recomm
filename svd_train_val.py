@@ -38,7 +38,7 @@ def get_data():
 	df_train = df[0:split_index]
 	df_test = df[split_index:].reset_index(drop=True)
 	return df_train, df_test, rows
-	
+
 def get_movies():
 	df = dataio.read_movies("/tmp/movielens/ml-1m/movies.dat", sep="::")
 	rows = len(df)
@@ -46,26 +46,26 @@ def get_movies():
 
 
 def svd(train, test,length,moviefile):
-    print ("MOvies file :")
-    print (len(moviefile))
+	print ("MOvies file :")
+	print (len(moviefile))
 	samples_per_batch = len(train) // BATCH_SIZE
 
 	iter_train = dataio.ShuffleIterator([train["user"],
-										 train["item"],
-										 train["rate"]],
-										batch_size=BATCH_SIZE)
+                                         train["item"],
+                                        train["rate"]],
+                                        batch_size=BATCH_SIZE)
 
 	iter_test = dataio.OneEpochIterator([test["user"],
-										 test["item"],
-										 test["rate"]],
-										batch_size=-1)
+                                         test["item"],
+                                        test["rate"]],
+                                        batch_size=-1)
 
 	user_batch = tf.placeholder(tf.int32, shape=[None], name="id_user")
 	item_batch = tf.placeholder(tf.int32, shape=[None], name="id_item")
 	rate_batch = tf.placeholder(tf.float32, shape=[None])
 
 	infer, regularizer = ops.inference_svd(user_batch, item_batch, user_num=USER_NUM, item_num=ITEM_NUM, dim=DIM,
-										   device=DEVICE)
+                                           device=DEVICE)
 	global_step = tf.contrib.framework.get_or_create_global_step()
 	_, train_op = ops.optimization(infer, regularizer, rate_batch, learning_rate=0.001, reg=0.05, device=DEVICE)
 	#zeros= tf.Variable(tf.zeros([1]),name="zeros")
@@ -81,8 +81,8 @@ def svd(train, test,length,moviefile):
 		for i in range(EPOCH_MAX * samples_per_batch):
 			users, items, rates = next(iter_train)
 			_, pred_batch = sess.run([train_op, infer], feed_dict={user_batch: users,
-																   item_batch: items,
-																   rate_batch: rates})
+		                                                           item_batch: items,
+		                                                                                                               rate_batch: rates})
 			pred_batch = clip(pred_batch)
 			errors.append(np.power(pred_batch - rates, 2))
 			if i % samples_per_batch == 0:
@@ -90,13 +90,13 @@ def svd(train, test,length,moviefile):
 				test_err2 = np.array([])
 				for users, items, rates in iter_test:
 					pred_batch = sess.run(infer, feed_dict={user_batch: users,
-															item_batch: items})
+				                                            item_batch: items})
 					pred_batch = clip(pred_batch)
 					test_err2 = np.append(test_err2, np.power(pred_batch - rates, 2))
 				end = time.time()
 				test_err = np.sqrt(np.mean(test_err2))
 				print("{:3d} {:f} {:f} {:f}(s)".format(i // samples_per_batch, train_err, test_err,
-													   end - start))
+			                                           end - start))
 				train_err_summary = make_scalar_summary("training_error", train_err)
 				test_err_summary = make_scalar_summary("test_error", test_err)
 				summary_writer.add_summary(train_err_summary, i)
@@ -112,50 +112,50 @@ def svd(train, test,length,moviefile):
 		print >>sys.stderr, 'starting up on %s port %s' % server_address
 		sock.bind(server_address)
 		sock.listen(1)
-		
+
 		movies=list(range(len(moviefile)))
 		print (movies)
 		users=[1]
 		pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
-		
+
 		moviesrecomm=list(zip(movies,pred_batch))
-                smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
-		
+		smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+
 		print (" Top Movies ------------------------------------------------------------")
-		
+
 		topmovies= smovies[0:10]
 		print (topmovies)
 		print
-		
-                while True:
-                     # Wait for a connection
-                     print >>sys.stderr, 'waiting for a connection'
-                     connection, client_address = sock.accept()
-                     try:
-                         print >>sys.stderr, 'connection from', client_address
-                         # Receive the data in small chunks and retransmit it
-                         while True:
-                             data = connection.recv(16)
-                             print >>sys.stderr, 'received "%s"' % data
-                             if data:
-                                 del users[:]
-                        
-                                 users.append(int(data))
-                                 print (users)
-                                 pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
-                                 moviesrecomm=list(zip(movies,pred_batch))
-                                 smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
-                                 topmovies= smovies[0:10]
-                                 print (topmovies)
-                                 
-                                 print moviefile["title"][topmovies[0]]
-                                 print >>sys.stderr, 'sending data back to the client'
-                                 connection.sendall(moviefile["title"][topmovies[2]])
-                             else:
-                                 print >>sys.stderr, 'no more data from', client_address
-                                 break
-                     finally:
-                         connection.close()
+
+		while True:
+			# Wait for a connection
+			print >>sys.stderr, 'waiting for a connection'
+			connection, client_address = sock.accept()
+			try:
+				print >>sys.stderr, 'connection from', client_address
+				# Receive the data in small chunks and retransmit it
+				while True:
+					data = connection.recv(16)
+					print >>sys.stderr, 'received "%s"' % data
+					if data:
+						del users[:]
+
+						users.append(int(data))
+						print (users)
+						pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
+						moviesrecomm=list(zip(movies,pred_batch))
+						smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
+						topmovies= smovies[0:10]
+						print (topmovies)
+
+						print moviefile["title"][topmovies[0]]
+						print >>sys.stderr, 'sending data back to the client'
+						connection.sendall(moviefile["title"][topmovies[2]])
+					else:
+						print >>sys.stderr, 'no more data from', client_address
+						break
+			finally:
+				connection.close()
 if __name__ == '__main__':
 	df_train, df_test, length = get_data()
 	df_movies = get_movies()
