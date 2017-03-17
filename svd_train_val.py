@@ -38,6 +38,7 @@ def get_data():
 	df_train = df[0:split_index]
 	df_test = df[split_index:].reset_index(drop=True)
 	return df_train, df_test, rows
+	
 def get_movies():
 	df = dataio.read_movies("/tmp/movielens/ml-1m/movies.dat", sep="::")
 	rows = len(df)
@@ -45,6 +46,8 @@ def get_movies():
 
 
 def svd(train, test,length,moviefile):
+    print ("MOvies file :)
+    print (len(moviefile))
 	samples_per_batch = len(train) // BATCH_SIZE
 
 	iter_train = dataio.ShuffleIterator([train["user"],
@@ -109,8 +112,9 @@ def svd(train, test,length,moviefile):
 		print >>sys.stderr, 'starting up on %s port %s' % server_address
 		sock.bind(server_address)
 		sock.listen(1)
-		movies=list(range(len(moviefile)))
 		
+		movies=list(range(len(moviefile)))
+		print (movies)
 		users=[1]
 		pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
 		
