@@ -17,7 +17,7 @@ BATCH_SIZE = 1000
 USER_NUM = 6040
 ITEM_NUM = 3952
 DIM = 15
-EPOCH_MAX = 10
+EPOCH_MAX = 100
 DEVICE = "/cpu:0"
 
 
@@ -147,10 +147,12 @@ def svd(train, test,length,moviefile):
 						smovies=sorted (moviesrecomm,key=lambda x:x[1],reverse=True)
 						topmovies= smovies[0:10]
 						print (topmovies)
-
-						print moviefile["title"][topmovies[0]]
-						print >>sys.stderr, 'sending data back to the client'
-						connection.sendall(moviefile["title"][topmovies[2]])
+						for item in topmovies:
+							itopmovie=item[0]
+							recommendedmovie=moviefile["title"][itopmovie]
+							#print >>sys.stderr, 'sending data back to the client'
+							connection.sendall(recommendedmovie+"\n")
+							#print >>sys.stderr, 'Sent data'
 					else:
 						print >>sys.stderr, 'no more data from', client_address
 						break
@@ -158,6 +160,7 @@ def svd(train, test,length,moviefile):
 				connection.close()
 if __name__ == '__main__':
 	df_train, df_test, length = get_data()
-	df_movies = get_movies()
+	df_movies,rows = get_movies()
+
 	svd(df_train, df_test, length,df_movies)
 	print("Done!")

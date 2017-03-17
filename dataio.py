@@ -5,7 +5,7 @@ import pandas as pd
 def read_movies(filname, sep="::"):
 	col_names = ["movie", "title", "tags"]
 	df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
-	print (df)
+	#print (df)
 	print ("Movies file length:")
 	print (len(df))	
 	
@@ -13,7 +13,7 @@ def read_movies(filname, sep="::"):
 	print (df["movie"][0])
 	print (df["tags"][0])
 	df["movie"] = df["movie"].astype(np.int32)
-
+       
 	return df
 
 def read_process(filname, sep="\t"):
