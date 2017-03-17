@@ -44,7 +44,7 @@ def get_movies():
 	return df, rows	
 
 
-def svd(train, test,length,movies):
+def svd(train, test,length,moviefile):
 	samples_per_batch = len(train) // BATCH_SIZE
 
 	iter_train = dataio.ShuffleIterator([train["user"],
@@ -144,9 +144,9 @@ def svd(train, test,length,movies):
                                  topmovies= smovies[0:10]
                                  print (topmovies)
                                  
-                                 print movies["title"][topmovies[1]]
+                                 print moviefile["title"][topmovies[0]]
                                  print >>sys.stderr, 'sending data back to the client'
-                                 connection.sendall(movies["title"][topmovies[2]])
+                                 connection.sendall(moviefile["title"][topmovies[2]])
                              else:
                                  print >>sys.stderr, 'no more data from', client_address
                                  break
