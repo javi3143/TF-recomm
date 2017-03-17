@@ -109,7 +109,7 @@ def svd(train, test,length,moviefile):
 		print >>sys.stderr, 'starting up on %s port %s' % server_address
 		sock.bind(server_address)
 		sock.listen(1)
-		movies=list(range(len(moviesfile)))
+		movies=list(range(len(moviefile)))
 		
 		users=[1]
 		pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
