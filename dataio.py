@@ -5,7 +5,9 @@ import pandas as pd
 def read_movies(filname, sep="::"):
     col_names = ["movie", "title", "tags"]
     df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
-    print (df["title"])
+    print (df["title"][1])
+    print (df["movie"][1])
+    print (df["tags"][1])
     #df["movie"] =""
     #df["title"] =""
     #for col in ("movie"):
