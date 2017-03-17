@@ -139,7 +139,10 @@ def svd(train, test,length,moviefile):
 					print >>sys.stderr, 'received "%s"' % data
 					if data:
 						del users[:]
-
+						try:
+							user = int(data)
+						except:
+							break
 						users.append(int(data))
 						print (users)
 						pred_batch = sess.run(infer, feed_dict={user_batch: users,item_batch: movies})
