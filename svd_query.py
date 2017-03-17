@@ -34,8 +34,7 @@ if __name__ == '__main__':
     #zeros= tf.Variable(tf.zeros([1]),name="zeros")
     user_batch = tf.placeholder(tf.int32, shape=[None], name="id_user")
     item_batch = tf.placeholder(tf.int32, shape=[None], name="id_item")
-    infer, regularizer = ops.inference_svd(user_batch, item_batch, user_num=USER_NUM, item_num=ITEM_NUM, dim=DIM,
-                                           device=DEVICE)
+    infer, regularizer = ops.inference_svd(user_batch, item_batch, user_num=USER_NUM, item_num=ITEM_NUM, dim=DIM, device=DEVICE)
     init_op = tf.global_variables_initializer()
     #print_tensors_in_checkpoint_file(file_name="/tmp/tfrecomm.ckpt", tensor_name='')
     #df_train, df_test = get_data()

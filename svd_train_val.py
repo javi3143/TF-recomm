@@ -46,7 +46,7 @@ def get_movies():
 
 
 def svd(train, test,length,moviefile):
-	print ("MOvies file :")
+	print ("Movies file length:")
 	print (len(moviefile))
 	samples_per_batch = len(train) // BATCH_SIZE
 
