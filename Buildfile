@@ -8,4 +8,4 @@ docker build -t tfrecommgpu .
 docker tag tfrecommgpu acobley/tfrecommgpu
 docker push acobley/tfrecommgpu
 docker rm runtfrecommgpu
-docker run --name runtfrecomm -p 81:81 -i -t acobley/tfrecommgpu bash
+docker run --name runtfrecommgpu -p 81:81 -i -t acobley/tfrecommgpu bash
