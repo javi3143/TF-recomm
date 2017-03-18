@@ -162,7 +162,9 @@ def svd(train, test,length,moviefile):
 			finally:
 				connection.close()
 if __name__ == '__main__':
+	print ("Get Ratings Data")
 	df_train, df_test, length = get_data()
+	print ("Get Movies Data")
 	df_movies,rows = get_movies()
 
 	svd(df_train, df_test, length,df_movies)
