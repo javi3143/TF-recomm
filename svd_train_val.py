@@ -155,7 +155,7 @@ def svd(train, test,length,moviefile):
 							recommendedmovie=moviefile["title"][itopmovie]
 							recommendedtags=moviefile["tags"][itopmovie]
 							#print >>sys.stderr, 'sending data back to the client'
-							connection.sendall(recommendedmovie+"\n")
+							connection.sendall(recommendedmovie+":"+recommendedtags+"\n")
 							#print >>sys.stderr, 'Sent data'
 					else:
 						print >>sys.stderr, 'no more data from', client_address
