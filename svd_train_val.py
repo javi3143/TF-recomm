@@ -153,6 +153,7 @@ def svd(train, test,length,moviefile):
 						for item in topmovies:
 							itopmovie=item[0]
 							recommendedmovie=moviefile["title"][itopmovie]
+							recommendedtags=moviefile["tags"][itopmovie]
 							#print >>sys.stderr, 'sending data back to the client'
 							connection.sendall(recommendedmovie+"\n")
 							#print >>sys.stderr, 'Sent data'
