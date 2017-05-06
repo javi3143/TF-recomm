@@ -4,7 +4,7 @@ import pandas as pd
 
 def read_movies(filname, sep="::"):
 	col_names = ["movie", "title", "tags"]
-	df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
+	df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python',skiprows=1)
 	#print (df)
 	print ("Movies file length:")
 	print (len(df))	
@@ -18,7 +18,7 @@ def read_movies(filname, sep="::"):
 
 def read_process(filname, sep="\t"):
 	col_names = ["user", "item", "rate", "st"]
-	df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python')
+	df = pd.read_csv(filname, sep=sep, header=None, names=col_names, engine='python',skiprows=1)
 	df["user"] -= 1
 	df["item"] -= 1
 	for col in ("user", "item"):
