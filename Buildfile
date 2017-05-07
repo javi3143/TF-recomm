@@ -1,7 +1,8 @@
 git add *.py
 git add Dockerfile
 git add Buildfile
-git commit -m "From Buildfile"
+git add download_data.sh
+git commit -m "From Buildfile ml-latest-small"
 git push
 docker rmi tfrecommgpu-small
 docker build -t tfrecommgpu-small .
