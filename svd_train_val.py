@@ -31,7 +31,7 @@ def make_scalar_summary(name, val):
 
 
 def get_data():
-	df = dataio.read_process("/tmp/movielens/ml-latest/ratings.csv", sep=",")
+	df = dataio.read_process("/tmp/movielens/ml-latest-small/ratings.csv", sep=",")
 	rows = len(df)
 	df = df.iloc[np.random.permutation(rows)].reset_index(drop=True)
 	split_index = int(rows * 0.9)
@@ -40,7 +40,7 @@ def get_data():
 	return df_train, df_test, rows
 
 def get_movies():
-	df = dataio.read_movies("/tmp/movielens/ml-latest/movies.csv", sep=",")
+	df = dataio.read_movies("/tmp/movielens/ml-latest-small/movies.csv", sep=",")
 	rows = len(df)
 	return df, rows	
 
