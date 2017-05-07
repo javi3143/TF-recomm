@@ -31,11 +31,15 @@ def make_scalar_summary(name, val):
 
 
 def get_data():
+	print("Reading")
 	df = dataio.read_process("/tmp/movielens/ml-latest/ratings.csv", sep=",")
 	rows = len(df)
+	print("iloc")
 	df = df.iloc[np.random.permutation(rows)].reset_index(drop=True)
 	split_index = int(rows * 0.9)
+	print("split train")
 	df_train = df[0:split_index]
+	print("Split test")
 	df_test = df[split_index:].reset_index(drop=True)
 	return df_train, df_test, rows
 
