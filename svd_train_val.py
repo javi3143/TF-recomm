@@ -14,8 +14,8 @@ import ops
 np.random.seed(13575)
 
 BATCH_SIZE = 10000
-USER_NUM = 6040
-ITEM_NUM = 3952
+USER_NUM = 259137
+ITEM_NUM = 165201
 DIM = 15
 EPOCH_MAX = 100
 DEVICE = "/cpu:0"
@@ -82,6 +82,7 @@ def svd(train, test,length,moviefile):
 		print("{} {} {} {}".format("epoch", "train_error", "val_error", "elapsed_time"))
 		errors = deque(maxlen=samples_per_batch)
 		start = time.time()
+		
 		for i in range(EPOCH_MAX * samples_per_batch):
 			users, items, rates = next(iter_train)
 			_, pred_batch = sess.run([train_op, infer], feed_dict={user_batch: users,
@@ -112,7 +113,7 @@ def svd(train, test,length,moviefile):
 		print("Model saved in file: %s" % save_path)
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		# Bind the socket to the port
-		server_address = ('0.0.0.0', 81)
+		server_address = ('127.0.0.1', 81)
 		print >>sys.stderr, 'starting up on %s port %s' % server_address
 		sock.bind(server_address)
 		sock.listen(1)
