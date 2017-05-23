@@ -4,7 +4,9 @@ This version is packaged into a dockerfile
 Notes:
 master branch is set to CPU and uses the small file as  training set
 GPU branch uses the large training set and can use the a GPU if it is available.  
-
+Typical timings
+macbook-Pro CPU only 140seconds per epoch
+Tesla K40c GPU 11 seconds per epoch
 
 
 ### Tensorflow-based Recommendation systems
