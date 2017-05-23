@@ -1,6 +1,11 @@
 # TF-recomm
 
 This version is packaged into a dockerfile
+Notes:
+master branch is set to CPU and uses the small file as  training set
+GPU branch uses the large training set and can use the a GPU if it is available.  
+
+
 
 ### Tensorflow-based Recommendation systems
 
