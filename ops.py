@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def inference_svd(user_batch, item_batch, user_num, item_num, dim=5, device="/cpu:0"):
-    with tf.device("/cpu:0"):
+    with tf.device(device):
         bias_global = tf.get_variable("bias_global", shape=[])
         w_bias_user = tf.get_variable("embd_bias_user", shape=[user_num])
         w_bias_item = tf.get_variable("embd_bias_item", shape=[item_num])
