@@ -36,7 +36,7 @@ def get_movies():
 if __name__ == '__main__':
 
     with tf.Session() as sess:
-       new_saver = tf.train.import_meta_graph("tfrecomm.meta")
+       new_saver = tf.train.import_meta_graph("tfrecomm.meta",clear_devices=True)
        new_saver.restore(sess, tf.train.latest_checkpoint('./'))
        sess.run(tf.global_variables_initializer())
        print ("Get Movies Data")
