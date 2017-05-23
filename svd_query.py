@@ -28,9 +28,9 @@ def clip(x):
 def make_scalar_summary(name, val):
     return summary_pb2.Summary(value=[summary_pb2.Summary.Value(tag=name, simple_value=val)])
 def get_movies():
-    df = dataio.read_movies("/tmp/movielens/ml-1m/movies.dat", sep="::")
+    df = dataio.read_movies("/tmp/movielens/ml-latest/movies.csv", sep=",")
     rows = len(df)
-    return df, rows	
+    return df, rows		
 
 
 if __name__ == '__main__':
