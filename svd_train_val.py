@@ -18,7 +18,7 @@ USER_NUM = 259137
 ITEM_NUM = 165201
 DIM = 15
 EPOCH_MAX = 100
-DEVICE = "/cpu:0"
+DEVICE = "/gpu:0"
 
 
 def clip(x):
