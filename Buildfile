@@ -3,9 +3,9 @@ git add Dockerfile
 git add Buildfile
 git commit -m "From Buildfile"
 git push
-docker rmi tfrecommgpuM
-docker build -t tfrecommgpuM .
-docker tag tfrecommgpuM acobley/tfrecommgpuM
-docker push acobley/tfrecommgpuM
-docker rm runtfrecommgpuM
-docker run --name runtfrecommgpuM -p 81:81 -i -t acobley/tfrecommgpuM bash
+docker rmi tfrecommgpum
+docker build -t tfrecommgpum .
+docker tag tfrecommgpum acobley/tfrecommgpum
+docker push acobley/tfrecommgpum
+docker rm runtfrecommgpum
+docker run --name runtfrecommgpum -p 81:81 -i -t acobley/tfrecommgpum bash
