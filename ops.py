@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def inference_svd(user_batch, item_batch, user_num, item_num, dim=5, device="/cpu:0"):
-    for device in ['/gpu:2','/gpu:3']:
+    for device in ['/gpu:0','/gpu:1','/gpu:2','/gpu:3']:
         with tf.device(device):
             bias_global = tf.get_variable("bias_global", shape=[])
             w_bias_user = tf.get_variable("embd_bias_user", shape=[user_num])
@@ -15,7 +15,7 @@ def inference_svd(user_batch, item_batch, user_num, item_num, dim=5, device="/cp
                                      initializer=tf.truncated_normal_initializer(stddev=0.02))
             embd_user = tf.nn.embedding_lookup(w_user, user_batch, name="embedding_user")
             embd_item = tf.nn.embedding_lookup(w_item, item_batch, name="embedding_item")
-    for device in ['/gpu:2','/gpu:3']:
+    for device in ['/gpu:0','/gpu:1','/gpu:2','/gpu:3']:
         with tf.device(device):
             infer = tf.reduce_sum(tf.multiply(embd_user, embd_item), 1)
             infer = tf.add(infer, bias_global)
@@ -28,7 +28,7 @@ def inference_svd(user_batch, item_batch, user_num, item_num, dim=5, device="/cp
 def optimization(infer, regularizer, rate_batch, learning_rate=0.001, reg=0.1, device="/cpu:0"):
     global_step = tf.train.get_global_step()
     assert global_step is not None
-    for device in ['/gpu:2','/gpu:3']:
+    for device in ['/gpu:0','/gpu:1','/gpu:2','/gpu:3']:
         with tf.device(device):
             cost_l2 = tf.nn.l2_loss(tf.subtract(infer, rate_batch))
             penalty = tf.constant(reg, dtype=tf.float32, shape=[], name="l2")
