@@ -5,6 +5,6 @@ RUN apt-get update && apt-get install -y \
    emacs
 RUN pip install Numpy
 RUN pip install Pandas
-RUN git clone -b MultiGPU https://github.com/acobley/TF-recomm.git #recom12
+RUN git clone -b MultiGPU https://github.com/acobley/TF-recomm.git #recom13
 RUN ./TF-recomm/download_data.sh
 EXPOSE 81

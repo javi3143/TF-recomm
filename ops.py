@@ -4,7 +4,7 @@ import tensorflow as tf
 def inference_svd(user_batch, item_batch, user_num, item_num, dim=5, device="/cpu:0"):
     for device in ['/gpu:0','/gpu:1','/gpu:2','/gpu:3']:
         with tf.device(device):
-            bias_global = tf.get_variable("bias_global", shape=[])
+            bias_global = tf.get_variable("bias_global", shape=[],reuse=True)
             w_bias_user = tf.get_variable("embd_bias_user", shape=[user_num])
             w_bias_item = tf.get_variable("embd_bias_item", shape=[item_num])
             bias_user = tf.nn.embedding_lookup(w_bias_user, user_batch, name="bias_user")
