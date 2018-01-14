@@ -13,7 +13,7 @@ import ops
 
 np.random.seed(13575)
 
-BATCH_SIZE = 1000
+BATCH_SIZE = 10000
 USER_NUM = 6040
 ITEM_NUM = 3952
 DIM = 15
