@@ -8,4 +8,4 @@ RUN pip install Numpy
 RUN pip install Pandas
 RUN git clone https://github.com/javi3143/tfrecomm.git #recom57
 RUN ./tfrecomm/download_data.sh
-EXPOSE 81
+EXPOSE 82
